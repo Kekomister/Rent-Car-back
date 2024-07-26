@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ts": "ts-node index.ts",
-    "start": "ts-node index.ts"
+    "build" : "tsc",
+    "start": "node public/index.ts"
   },
   "keywords": [],
   "author": "",
