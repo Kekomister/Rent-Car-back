@@ -20,12 +20,12 @@
 //   };
 
 
-const config = {
-  host: "localhost",
-  user: "rentcars",
-  password: "",
-  database: 'rentcars',
-  port: 3306
-}
+// const config = {
+//   host: "localhost",
+//   user: "rentcars",
+//   password: "",
+//   database: 'rentcars',
+//   port: 3306
+// }
 
-export default config;
+// export default config;
