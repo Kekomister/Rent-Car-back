@@ -12,7 +12,7 @@ export class AutoController {
             const pool = mysql.createConnection(config);
             let query = `SELECT 
             id_auto, nombre, marca, costo, imagen 
-            FROM Autos`;
+            FROM autos`;
             pool.connect(function (err) {
                 if (err) throw err;
                 pool.query(query, function (err, result) {
@@ -74,7 +74,7 @@ export class AutoController {
 
                 let img = await ImagenController.convertirABuffer(req.files);
 
-                let query = `INSERT INTO Autos  (nombre, marca, imagen, costo) 
+                let query = `INSERT INTO autos  (nombre, marca, imagen, costo) 
                             VALUES (?)`
                 let values = [bod.nombre, bod.marca, img, bod.costo];
                 pool.connect(function (err) {
@@ -127,13 +127,13 @@ export class AutoController {
                 
                 if (req.files?.length == 0) {
                     query =
-                        `UPDATE Autos SET costo = ? 
+                        `UPDATE autos SET costo = ? 
                         WHERE id_auto = ?`;
                     
                     values = [bod.costo, req.params.id];
                 } else {
                     query =
-                        `UPDATE Autos SET 
+                        `UPDATE autos SET 
                     imagen = ?,
                     costo = ?
                     WHERE id_auto = ?`;
@@ -168,7 +168,7 @@ export class AutoController {
 
     static deleteAuto = (async (req: Request, res: Response) => {
         try {
-            let query = `DELETE FROM Autos WHERE id_auto = ?`;
+            let query = `DELETE FROM autos WHERE id_auto = ?`;
             const pool = mysql.createConnection(config);
             let value = req.params.id;
             pool.connect(function (err) {

@@ -39,7 +39,7 @@ export class UsuarioController {
         try {
             const pool = mysql.createConnection(config);
             let query =
-                `INSERT INTO Usuarios (nombre, apellido, dni, nombre_usuario, contrasenia, mail) 
+                `INSERT INTO usuarios (nombre, apellido, dni, nombre_usuario, contrasenia, mail) 
                 VALUES (?)`
             let values = [
                 req.body.nombre,
@@ -78,7 +78,7 @@ export class UsuarioController {
             //console.log(req.body);
             const pool = mysql.createConnection(config);
             let query =
-                `UPDATE Usuarios SET 
+                `UPDATE usuarios SET 
                 nombre = ?, 
                 apellido = ?,
                 nombre_usuario = ?,
@@ -117,7 +117,7 @@ export class UsuarioController {
 
     static deleteUsuario = (async (req: Request, res: Response) => {
         try {
-            let query = `DELETE FROM Usuarios WHERE id_usuario = ?`;
+            let query = `DELETE FROM usuarios WHERE id_usuario = ?`;
             const pool = mysql.createConnection(config);
             let value = req.params.id;
             pool.connect(function (err) {

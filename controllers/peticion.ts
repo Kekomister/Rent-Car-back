@@ -12,16 +12,16 @@ export class PeticionController {
             const pool = mysql.createConnection(config);
             let query = `SELECT 
             id_peticion, sucursal_retiro, sucursal_devolucion,
-            fecha_retiro, fecha_devolucion, codigo_retiro, Peticiones.precio,
-            Peticiones.auto_sucursal, usuario, finalizado,
-            nombre_usuario, Autos_Sucursales.id_auto, imagen,
+            fecha_retiro, fecha_devolucion, codigo_retiro, peticiones.precio,
+            peticiones.auto_sucursal, usuario, finalizado,
+            nombre_usuario, autos_sucursales.id_auto, imagen,
             sret.ciudad as ciudad_ret, sdev.ciudad as ciudad_dev
-            FROM Peticiones
-            JOIN Usuarios ON Usuarios.id_usuario = Peticiones.usuario
-            JOIN Autos_Sucursales ON Autos_Sucursales.id_auto_sucursal = Peticiones.auto_sucursal
-            JOIN Sucursales sret ON sret.id_sucursal = Peticiones.sucursal_retiro
-            JOIN Sucursales sdev ON sdev.id_sucursal = Peticiones.sucursal_devolucion
-            Join Autos ON Autos.id_auto = Autos_Sucursales.id_auto`;
+            FROM peticiones
+            JOIN usuarios ON usuarios.id_usuario = peticiones.usuario
+            JOIN autos_sucursales ON autos_sucursales.id_auto_sucursal = peticiones.auto_sucursal
+            JOIN sucursales sret ON sret.id_sucursal = peticiones.sucursal_retiro
+            JOIN sucursales sdev ON sdev.id_sucursal = peticiones.sucursal_devolucion
+            Join autos ON autos.id_auto = autos_sucursales.id_auto`;
 
             pool.connect(function (err) {
                 if (err) throw err;
@@ -54,7 +54,7 @@ export class PeticionController {
         try {
             const pool = mysql.createConnection(config);
             let query =
-                `INSERT INTO Peticiones
+                `INSERT INTO peticiones
                 (sucursal_retiro, sucursal_devolucion, fecha_retiro,
                 fecha_devolucion, codigo_retiro, precio, auto_sucursal, 
                 usuario, finalizado) 
@@ -100,7 +100,7 @@ export class PeticionController {
         try {
             //console.log(req.body);
             let query =
-                `UPDATE Peticiones SET
+                `UPDATE peticiones SET
                 sucursal_devolucion = ?
                 WHERE id_peticion = ?`;
             const pool = mysql.createConnection(config);
@@ -133,7 +133,7 @@ export class PeticionController {
         try {
             //console.log(req.body);
             let query =
-                `UPDATE Peticiones SET
+                `UPDATE peticiones SET
                 finalizado = ?
                 WHERE id_peticion = ?`;
             const pool = mysql.createConnection(config);
@@ -166,7 +166,7 @@ export class PeticionController {
 
     static deletePeticion = (async (req: Request, res: Response) => {
         try {
-            let query = `DELETE FROM Peticiones WHERE id_peticion = ?`;
+            let query = `DELETE FROM peticiones WHERE id_peticion = ?`;
             const pool = mysql.createConnection(config);
             let value = req.params.id;
 

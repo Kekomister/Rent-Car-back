@@ -11,11 +11,11 @@ export class Auto_SucursalController {
             let auto_Sucursales: mysql.QueryResult;
             const pool = mysql.createConnection(config);
             let query = `SELECT 
-            id_auto_sucursal, Autos_Sucursales.id_auto, id_sucursal_actual, 
+            id_auto_sucursal, autos_sucursales.id_auto, id_sucursal_actual, 
             nombre, marca, costo, ciudad, imagen
-            FROM Autos_Sucursales
-            INNER JOIN Autos on Autos.id_auto = Autos_Sucursales.id_auto
-            INNER JOIN Sucursales on Sucursales.id_sucursal = Autos_Sucursales.id_sucursal_actual`;
+            FROM autos_sucursales
+            INNER JOIN autos on autos.id_auto = autos_sucursales.id_auto
+            INNER JOIN sucursales on sucursales.id_sucursal = autos_sucursales.id_sucursal_actual`;
             pool.connect(function (err) {
                 if (err) throw err;
                 pool.query(query, function (err, result) {
@@ -45,11 +45,11 @@ export class Auto_SucursalController {
             let auto_Sucursales: mysql.QueryResult;
             const pool = mysql.createConnection(config);
             let query = `SELECT 
-            id_auto_sucursal, Autos_Sucursales.id_auto, id_sucursal_actual, 
+            id_auto_sucursal, autos_sucursales.id_auto, id_sucursal_actual, 
             nombre, marca, costo, ciudad, imagen
-            FROM Autos_Sucursales
-            INNER JOIN Autos on Autos.id_auto = Autos_Sucursales.id_auto
-            INNER JOIN Sucursales on Sucursales.id_sucursal = Autos_Sucursales.id_sucursal_actual
+            FROM autos_sucursales
+            INNER JOIN autos on autos.id_auto = autos_sucursales.id_auto
+            INNER JOIN sucursales on sucursales.id_sucursal = autos_sucursales.id_sucursal_actual
 			WHERE id_auto_sucursal = ?`;
             let value = req.params.id;
 
@@ -97,7 +97,7 @@ export class Auto_SucursalController {
                     id_auto = result[0].id_auto;
                     //console.log(id_auto);
 
-                    query = `INSERT INTO Autos_Sucursales 
+                    query = `INSERT INTO autos_sucursales 
                     (id_auto, id_sucursal_actual) VALUES (?)`
                     let values = [id_auto, req.body.id_sucursal_actual];
 
@@ -125,7 +125,7 @@ export class Auto_SucursalController {
         try {
             const pool = mysql.createConnection(config);
 
-            let query = `INSERT INTO Autos_Sucursales 
+            let query = `INSERT INTO autos_sucursales 
             (id_auto, id_sucursal_actual) VALUES (?)`
             let values = [req.params.id, req.body.id_sucursal_actual];
 
@@ -154,7 +154,7 @@ export class Auto_SucursalController {
         try {
             //console.log(req.body);
             let query =
-                `UPDATE Autos_Sucursales SET 
+                `UPDATE autos_sucursales SET 
                 id_sucursal_actual = ?
                 WHERE id_auto_sucursal = ?`;
             const pool = mysql.createConnection(config);
@@ -184,7 +184,7 @@ export class Auto_SucursalController {
 
     static deleteAuto_Sucursal = (async (req: Request, res: Response) => {
         try {
-            let query = `DELETE FROM Autos_Sucursales WHERE id_auto_sucursal = ?`;
+            let query = `DELETE FROM autos_sucursales WHERE id_auto_sucursal = ?`;
             const pool = mysql.createConnection(config);
             let value = req.params.id;
 

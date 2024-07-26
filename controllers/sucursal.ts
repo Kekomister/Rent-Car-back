@@ -11,8 +11,8 @@ export class SucursalController {
             const pool = mysql.createConnection(config);
             var query = `SELECT id_sucursal, ciudad, duenio,
             nombre_usuario, nombre, apellido, mail
-            FROM Sucursales
-            INNER JOIN Usuarios on Usuarios.id_usuario = Sucursales.duenio`;
+            FROM sucursales
+            INNER JOIN usuarios on usuarios.id_usuario = sucursales.duenio`;
             pool.connect(function (err) {
                 if (err) throw err;
                 pool.query(query, function (err, result) {
@@ -40,8 +40,8 @@ export class SucursalController {
             const pool = mysql.createConnection(config);
             let query = `SELECT id_sucursal, ciudad, duenio,
             nombre_usuario, mail
-            FROM Sucursales
-            INNER JOIN Usuarios on Usuarios.id_usuario = Sucursales.duenio
+            FROM sucursales
+            INNER JOIN usuarios on usuarios.id_usuario = sucursales.duenio
             WHERE id_sucursal = ?`
             let id = req.params.id;
             pool.connect(function (err) {
@@ -71,7 +71,7 @@ export class SucursalController {
         try {
             const pool = mysql.createConnection(config);
             let query =
-                `INSERT INTO Sucursales (ciudad, duenio) VALUES (?)`;
+                `INSERT INTO sucursales (ciudad, duenio) VALUES (?)`;
             let values = [req.body.ciudad, req.body.duenio];
             pool.connect(function (err) {
                 if (err) throw err;
@@ -99,7 +99,7 @@ export class SucursalController {
         try {
             //console.log(req.body);
             let query =
-                `UPDATE Sucursales SET duenio = ? WHERE id_sucursal = ?`;
+                `UPDATE sucursales SET duenio = ? WHERE id_sucursal = ?`;
             let values = [req.body.id_usuario, req.params.id]
             const pool = mysql.createConnection(config);
             pool.connect(function (err) {
@@ -126,7 +126,7 @@ export class SucursalController {
 
     static deleteSucursal = (async (req: Request, res: Response) => {
         try {
-            let query = `DELETE FROM Sucursales WHERE id_sucursal = ?`;
+            let query = `DELETE FROM sucursales WHERE id_sucursal = ?`;
             let value = req.params.id;
             const pool = mysql.createConnection(config);
             pool.connect(function (err) {
