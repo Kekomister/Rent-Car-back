@@ -9,7 +9,7 @@ export class UsuarioController {
         try {
             let usuarios: mysql.QueryResult;
             const pool = mysql.createConnection(config);
-            var query = `SELECT * FROM Usuarios`;
+            var query = `SELECT * FROM usuarios`;
             pool.connect(function (err) {
                 if (err) throw err;
                 pool.query(query, function (err, result) {
