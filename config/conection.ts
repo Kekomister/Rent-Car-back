@@ -25,7 +25,7 @@ const config = {
   user: "rentcars",
   password: "",
   database: 'rentcars',
-  port: 3307
+  port: 3306
 }
 
 export default config;
