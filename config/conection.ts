@@ -22,9 +22,9 @@
 
 const config = {
   host: "sql10.freesqldatabase.com",
-  user: "sql10722373",
-  password: "UzrJHq2QF9",
-  database: 'sql10722373',
+  user: "sql10723479",
+  password: "rqJuVFmItR",
+  database: 'sql10723479',
   port: 3306
 }
 
